@@ -1,4 +1,5 @@
 
+import tkinter
 import tweepy
 from tkinter import *
 
@@ -66,11 +67,13 @@ def reply():
             break
 
 # *** Step 3 - Creating the GUI with tkinter *** #
-root = Tk.Tk(screenName="Box")
+root = tkinter.Tk(screenName="Box")
+root.geometry("500x500")
 
 # ****** Step 3.1 - Create button ****** #
 label1 = Label( root, text="Search")
-E1 = Entry(root, bd=5)
+b1 = tkinter.Button(text="Submit", command = Entry(root, bd=5))
+E1 = Entry(root, bd =5)
 label2 = Label( root, text="Number of Tweets")
 E2 = Entry(root, bd =5)
 label3 = Label( root, text="Response")
@@ -115,10 +118,10 @@ def main():
     if retweet == "yes":
         retweet()
 
-    if favorite == "yes":
+    if like == "yes":
         like()
 
-    if follow == "yes":
+    if followback == "yes":
         followback()
 # ****** Step 3.3 - Button to submit our requests ****** #
 submit = Button(root, text = "Execute", command=main)
