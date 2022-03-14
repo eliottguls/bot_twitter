@@ -1,3 +1,4 @@
+from os import execlpe
 import tweepy
 import time
 
@@ -11,6 +12,24 @@ access_token_secret = "0ZwjK8sAc7WtlLlML6v1BQfzXypud0jFJjEW1Zf6iMJAg"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-# api.update_status('Twitter reporting in live')
+
+hashtag = '#alternance'
+tweetnumber = 10
+
+tweets = tweepy.Cursor(api.search, hashtag).items(tweetnumber)
+
+def searchBot():
+    for tweet in tweets:
+        try:
+            tweet.retweet()
+            print("Retweet Done")
+            time.sleep(15)
+        except tweepy.TweepError as e:
+            print(e.reason)
+            time.sleep(15)
+
+searchBot()
+
+
 
 

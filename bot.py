@@ -11,7 +11,7 @@ access_token_secret = "0ZwjK8sAc7WtlLlML6v1BQfzXypud0jFJjEW1Zf6iMJAg"
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 # api.update_status('Twitter reporting in live')
 
 def read_last_seen(FILE_NAME):
@@ -31,7 +31,7 @@ def store_last_seen(FILE_NAME, last_seen_id):
 def reply():
     tweets = api.mentions_timeline(read_last_seen(FILE_NAME), tweet_mode='extended') # return all the mensions 
     for tweet in reversed(tweets):
-        if '#ultimatebot' in tweet.full_text.lower(): # verify if an hashtag is present(lower or uppercase)
+        if '#Ultila' in tweet.full_text.lower(): # verify if an hashtag is present(lower or uppercase)
             print(str(tweet.id) + ' - ' + tweet.full_text) 
             api.update_status("@" + tweet.user.screen_name + " Auto reply, like and retweet works", tweet.id) #reply to tweets 
             api.create_favorite(tweet.id)
@@ -40,4 +40,4 @@ def reply():
 
 while True:
     reply()
-    time.sleep(15)
+    time.sleep(2)
